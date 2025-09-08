@@ -49,6 +49,17 @@
       var downloadBtn = document.querySelector('.download-button');
       var notice = document.getElementById('platform-notice');
 
+      if (downloadBtn) {
+        try {
+          var url = new URL(downloadBtn.getAttribute('href'), window.location.href);
+          url.searchParams.set('v', Date.now().toString());
+          downloadBtn.setAttribute('href', url.toString());
+        } catch (e) {
+          var sep = downloadBtn.href.indexOf('?') === -1 ? '?' : '&';
+          downloadBtn.href = downloadBtn.href + sep + 'v=' + Date.now();
+        }
+      }
+
       if (downloadBtn && !isAndroid) {
         downloadBtn.classList.add('disabled');
         var msg = isIOS ? 'Download de APK disponível apenas em dispositivos Android.' : 'Este download está disponível apenas em dispositivos Android.';
